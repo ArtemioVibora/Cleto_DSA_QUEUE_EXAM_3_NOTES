@@ -36,7 +36,7 @@ int pop(Node **front, Node **rear) {
     int item;
 
     if (isEmpty(*front, *rear)) {
-        cout << "Queue is empty!" << endl;
+        return -99999999;
     }
     else {
         item = (*front)->value;
@@ -53,13 +53,13 @@ int pop(Node **front, Node **rear) {
     return item;
 }
 
-int front(Node *front, Node *rear) {
+int peek(Node *front, Node *rear) {
     if (isEmpty(front, rear)) {
-        cout << "Queue is empty!" << endl;
+
+        return -99999999;
     }
-    else {
-        return front->value;
-    }
+
+    return front->value;
 }
 
 void menu() {
@@ -80,9 +80,44 @@ void runProgram() {
 
     front = rear = NULL;
 
+    bool flag = true;
 
+    int choice;
+    int item;
+
+    while (flag) {
+        menu();
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Enter item: ";
+                cin >> item;
+                push(&front, &rear, item);
+                break;
+            case 2:
+                item = pop(&front, &rear);
+                if (item == -99999999)
+                    cout << "Queue is empty!" << endl;
+                else
+                    cout << "Popped item: " << item << endl;
+                break;
+            case 3:
+                item = peek(front, rear);
+                if (item == -99999999)
+                    cout << "Queue is empty!" << endl;
+                else
+                    cout << "Front item: " << item << endl;
+                break;
+            case 4:
+                flag = false;
+                break;
+            default:
+                cout << "Invalid choice!" << endl;
+                break;
+        }
+    }
 }
 
 int main() {
-
+    runProgram();
 }
